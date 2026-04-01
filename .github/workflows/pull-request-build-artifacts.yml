@@ -1,0 +1,82 @@
+name: Pull Request Build Artifacts
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cpp_build_artifacts:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-14, macos-latest]
+
+    env:
+      OTIO_BUILD_CONFIG: Release
+      OTIO_BUILD_DIR: ${{ github.workspace }}/build
+      OTIO_INSTALL_DIR: ${{ github.workspace }}/install
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          submodules: "recursive"
+
+      - name: Configure C++ build
+        run: |
+          cmake -E make_directory ${{ env.OTIO_BUILD_DIR }}
+          cd ${{ env.OTIO_BUILD_DIR }}
+          cmake ${{ github.workspace }} -DCMAKE_INSTALL_PREFIX=${{ env.OTIO_INSTALL_DIR }} -DOTIO_AUTOMATIC_SUBMODULES=OFF -DOTIO_SHARED_LIBS=OFF
+
+      - name: Build C++ core
+        run: |
+          cd ${{ env.OTIO_BUILD_DIR }}
+          cmake --build . --config ${{ env.OTIO_BUILD_CONFIG }}
+
+      - name: Install C++ core
+        run: |
+          cd ${{ env.OTIO_BUILD_DIR }}
+          cmake --build . --target install --config ${{ env.OTIO_BUILD_CONFIG }}
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: cpp-build-${{ matrix.os }}
+          if-no-files-found: warn
+          path: |
+            ${{ env.OTIO_BUILD_DIR }}
+            ${{ env.OTIO_INSTALL_DIR }}
+
+  python_wheel_artifacts:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-14, macos-latest]
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          submodules: "recursive"
+
+      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5.4.0
+        with:
+          python-version: "3.12"
+
+      - name: Install python build dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools wheel
+
+      - name: Build Python wheel
+        run: |
+          CMAKE_ARGS="-DOTIO_AUTOMATIC_SUBMODULES=OFF" python -m pip wheel . -w wheelhouse -v
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: python-wheel-${{ matrix.os }}-py312
+          if-no-files-found: warn
+          path: |
+            wheelhouse/*.whl
