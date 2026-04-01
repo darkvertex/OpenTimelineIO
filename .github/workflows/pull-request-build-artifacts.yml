@@ -73,8 +73,10 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
 
       - name: Build Python wheel
+        env:
+          CMAKE_ARGS: -DOTIO_AUTOMATIC_SUBMODULES=OFF
         run: |
-          CMAKE_ARGS="-DOTIO_AUTOMATIC_SUBMODULES=OFF" python -m pip wheel . -w wheelhouse -v
+          python -m pip wheel . -w wheelhouse -v
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
