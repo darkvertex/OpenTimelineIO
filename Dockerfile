@@ -21,7 +21,7 @@ RUN cmake -S . -B /tmp/otio-cpp-build \
     -DOTIO_AUTOMATIC_SUBMODULES=OFF \
     -DOTIO_SHARED_LIBS=OFF \
     && cmake --build /tmp/otio-cpp-build --parallel \
-    && cmake --build /tmp/otio-cpp-build --target test --parallel \
+    && ctest --test-dir /tmp/otio-cpp-build --output-on-failure \
     && cmake --build /tmp/otio-cpp-build --target install --parallel
 
 RUN python3 -m pip install --upgrade pip setuptools wheel \
