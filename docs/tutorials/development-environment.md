@@ -9,11 +9,9 @@ containerized environment for native, Python, and browser-oriented work.
 
 This repository now includes two first-class environment definitions:
 
-- `/home/runner/work/OpenTimelineIO/OpenTimelineIO/Dockerfile` is the canonical
-  clean build environment.
-- `/home/runner/work/OpenTimelineIO/OpenTimelineIO/.devcontainer/devcontainer.json`
-  builds on that image and is the fastest path for contributors using VS Code or
-  any Dev Container-compatible editor.
+- `Dockerfile` is the canonical clean build environment.
+- `.devcontainer/devcontainer.json` builds on that image and is the fastest path
+  for contributors using VS Code or any Dev Container-compatible editor.
 
 The image intentionally includes the current native/Python toolchain plus the
 common browser-workstream prerequisites:
