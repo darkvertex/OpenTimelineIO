@@ -121,26 +121,30 @@ OTIO_DISABLE_SHELLOUT_TESTS=1 make test
 
 ## Browser/wasm workbench
 
-This repository does **not** yet ship a dedicated browser package, TypeScript
-wrapper layer, or JavaScript runtime demo. The Dockerfile and devcontainer still
-install the browser-oriented toolchain so contributors can work on that slice in
-a reproducible environment.
+This repository now ships a browser-first wasm package under
+`src/wasm-opentimelineio`.
 
-The current starting point for experimental wasm work is to configure the C++
-core with Emscripten from the same clean environment:
+The package includes:
+
+- an embind bridge for OTIO JSON parse/stringify
+- a TypeScript wrapper layer
+- a browser hello-world demo that exercises parse/stringify roundtripping
+
+For the dedicated browser guide, see [Browser and WebAssembly Build](./browser-wasm.md).
+
+Configure the browser build with Emscripten from the same clean environment:
 
 ```bash
 source .venv/bin/activate
+npm ci --prefix src/wasm-opentimelineio
 emcmake cmake -S . -B build-wasm \
   -DOTIO_AUTOMATIC_SUBMODULES=OFF \
   -DOTIO_PYTHON_INSTALL=OFF \
   -DOTIO_SHARED_LIBS=OFF \
+  -DOTIO_WASM_BUILD=ON \
   -DBUILD_TESTING=OFF
-cmake --build build-wasm
+cmake --build build-wasm --target otio_wasm_package
 ```
-
-Today, that path should be treated as a workbench for the core libraries rather
-than a finished browser distribution.
 
 ## Browser MVP guidance for future contributors
 

@@ -150,9 +150,11 @@ If you want to contribute to the project, start with:
 
 - https://opentimelineio.readthedocs.io/en/latest/tutorials/contributing.html
 - https://opentimelineio.readthedocs.io/en/latest/tutorials/development-environment.html
+- https://opentimelineio.readthedocs.io/en/latest/tutorials/browser-wasm.html
 
 The repository also includes a root `Dockerfile` and a `.devcontainer`
-configuration for a reproducible clean build environment.
+configuration for a reproducible clean build environment, plus a browser-first
+wasm package in `src/wasm-opentimelineio`.
 
 You can get the latest development version via:
 

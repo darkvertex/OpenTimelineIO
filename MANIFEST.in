@@ -1,4 +1,5 @@
-include README.md README_contrib.md CHANGELOG.md LICENSE.txt NOTICE.txt SECURITY.md CMakeLists.txt
+include README.md README_contrib.md CHANGELOG.md LICENSE.txt NOTICE.txt SECURITY.md CMakeLists.txt Dockerfile .dockerignore
+recursive-include .devcontainer *
 recursive-include examples *
 recursive-include src *
 recursive-include tests *
@@ -28,5 +29,6 @@ global-exclude *.pyd
 
 prune maintainers
 prune tsc
+prune src/wasm-opentimelineio/node_modules
 prune src/deps/pybind11/tools/clang
 prune src/deps/rapidjson/thirdparty

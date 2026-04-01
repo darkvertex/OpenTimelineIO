@@ -39,6 +39,7 @@ Tutorials
 
    tutorials/adapters
    tutorials/architecture
+   tutorials/browser-wasm
    tutorials/contributing
    tutorials/feature-matrix
    tutorials/otio-timeline-structure
