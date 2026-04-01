@@ -28,6 +28,10 @@ still have access to it.
 
 # Developer Quickstart
 
+For the reproducible Docker/devcontainer workflow, a clean-checkout build guide,
+and the current browser/wasm workbench, see
+[Development Environment](./development-environment.md).
+
 Get the source and submodules:
 + `git clone git@github.com:AcademySoftwareFoundation/OpenTimelineIO.git`
 

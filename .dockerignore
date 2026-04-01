@@ -1,0 +1,12 @@
+.git
+.venv
+*.egg-info
+*.pyc
+*.pyo
+__pycache__/
+build
+build-*/
+dist
+docs/_build
+install
+install-*/

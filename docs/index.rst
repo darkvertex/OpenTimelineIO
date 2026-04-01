@@ -27,6 +27,7 @@ Quick Start
    :caption: Quick Start
 
    tutorials/quickstart
+   tutorials/development-environment
    tutorials/otio-env-variables
    tutorials/otiotool
 
