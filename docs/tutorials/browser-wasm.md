@@ -2,9 +2,7 @@
 
 This guide documents the browser-first MVP path for OpenTimelineIO.
 
-The browser package lives under
-`/home/runner/work/OpenTimelineIO/OpenTimelineIO/src/wasm-opentimelineio` and
-contains:
+The browser package lives under `src/wasm-opentimelineio` and contains:
 
 - the Emscripten/embind bridge in `otio_wasm_bindings.cpp`
 - the TypeScript wrapper layer in `typescript/index.ts`
@@ -71,7 +69,7 @@ Generated browser artifacts land in:
 The main outputs are:
 
 - `otio_wasm.js`
-- `otio_wasm.js`
+- `otio_wasm.d.ts`
 - `otio_wasm.wasm`
 - `index.js`
 - `index.d.ts`
