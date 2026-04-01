@@ -2,6 +2,7 @@
 *.pyc
 build*
 dist*
+wheelhouse/
 *.egg-info
 .coverage
 coverage.info

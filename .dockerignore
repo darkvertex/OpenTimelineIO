@@ -1,0 +1,11 @@
+.git
+.github
+__pycache__
+*.egg-info
+*.pyc
+*.pyd
+*.so
+.venv
+build
+dist
+lcov_html_report
