@@ -25,5 +25,5 @@ RUN cmake -S . -B /tmp/otio-cpp-build \
     && cmake --build /tmp/otio-cpp-build --target install --parallel
 
 RUN python3 -m pip install --upgrade pip setuptools wheel \
-    && CMAKE_ARGS="-DOTIO_AUTOMATIC_SUBMODULES=OFF" python3 -m pip install --no-build-isolation . -v \
+    && CMAKE_ARGS="-DOTIO_AUTOMATIC_SUBMODULES=OFF" python3 -m pip install . -v \
     && python3 -c "import opentimelineio, opentimelineio._otio, opentimelineio._opentime"
