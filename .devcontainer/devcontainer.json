@@ -12,7 +12,7 @@
   "remoteEnv": {
     "PATH": "${containerWorkspaceFolder}/.venv/bin:${containerEnv:PATH}"
   },
-  "postCreateCommand": "bash -lc 'git submodule update --init --recursive && python3 -m venv .venv && . .venv/bin/activate && python -m pip install --upgrade pip && python -m pip install -r docs/requirements.txt && python -m pip install -e \".[dev]\"'",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
   "postStartCommand": "bash -lc 'git config --global --add safe.directory ${containerWorkspaceFolder}'",
   "customizations": {
     "vscode": {
