@@ -3,9 +3,103 @@
   <head>
     <meta charset="utf-8" />
     <title>OpenTimelineIO Browser Demo</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        line-height: 1.5;
+        margin: 0;
+        padding: 2rem;
+      }
+
+      main {
+        display: grid;
+        gap: 1rem;
+        margin: 0 auto;
+        max-width: 70rem;
+      }
+
+      .cards {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+      }
+
+      .card,
+      .panel {
+        background: #f7f7f9;
+        border: 1px solid #d9d9df;
+        border-radius: 0.5rem;
+        padding: 1rem;
+      }
+
+      code,
+      pre {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      pre {
+        margin: 0;
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      dt {
+        font-weight: 600;
+      }
+
+      dd {
+        margin: 0 0 0.75rem;
+      }
+    </style>
   </head>
   <body>
-    <p>Open the developer console to see the OTIO browser demo output.</p>
+    <main>
+      <section class="panel">
+        <h1>OpenTimelineIO wasm browser demo</h1>
+        <p>
+          This page loads the frontend wasm build, fetches a real repo sample OTIO
+          file, parses it with the browser module, and summarizes what is inside.
+        </p>
+        <dl>
+          <dt>Sample source</dt>
+          <dd><code data-sample-path>Loading…</code></dd>
+          <dt>Status</dt>
+          <dd data-demo-status>Loading wasm module and sample OTIO…</dd>
+        </dl>
+      </section>
+
+      <section class="cards">
+        <article class="card">
+          <h2>Timeline</h2>
+          <div data-timeline-name>—</div>
+        </article>
+        <article class="card">
+          <h2>Tracks</h2>
+          <div><strong data-track-count>0</strong> total</div>
+          <div data-track-list>—</div>
+        </article>
+        <article class="card">
+          <h2>Clips</h2>
+          <div><strong data-clip-count>0</strong> total</div>
+          <div data-clip-list>—</div>
+        </article>
+        <article class="card">
+          <h2>Transitions</h2>
+          <div><strong data-transition-count>0</strong> total</div>
+          <div data-transition-list>—</div>
+        </article>
+        <article class="card">
+          <h2>Schema objects</h2>
+          <div><strong data-schema-count>0</strong> discovered</div>
+        </article>
+      </section>
+
+      <section class="panel">
+        <h2>Roundtripped OTIO JSON</h2>
+        <pre data-roundtrip-json>Waiting for roundtrip output…</pre>
+      </section>
+    </main>
     <script type="module" src="./browser-demo.js"></script>
   </body>
 </html>

@@ -6,7 +6,7 @@ The browser package lives under `src/wasm-opentimelineio` and contains:
 
 - the Emscripten/embind bridge in `otio_wasm_bindings.cpp`
 - the TypeScript wrapper layer in `typescript/index.ts`
-- the browser hello-world demo in `typescript/browser-demo.ts`
+- the browser sample-file demo in `typescript/browser-demo.ts`
 
 ## MVP scope
 
@@ -75,6 +75,7 @@ The main outputs are:
 - `index.d.ts`
 - `browser-demo.js`
 - `browser-demo.html`
+- `clip_example.otio`
 
 ## Minimal validation path
 
@@ -87,9 +88,10 @@ cmake --build build-wasm --target otio_wasm_package
 Then serve the generated `build-wasm/src/wasm-opentimelineio/dist/` directory
 with any static web server and open `browser-demo.html`.
 
-That demo loads the module in a browser-oriented environment, parses an OTIO
-JSON string, stringifies it back out, and verifies the roundtripped JSON still
-contains the expected timeline schema and name.
+That page loads the module in a browser-oriented environment, fetches the copied
+repo sample `tests/sample_data/clip_example.otio`, parses it with the wasm
+module, and then renders a visible summary of the timeline, tracks, clips, and
+transitions before showing the roundtripped OTIO JSON.
 
 ## Browser hello world
 

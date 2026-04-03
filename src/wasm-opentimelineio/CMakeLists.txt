@@ -9,6 +9,10 @@ endif()
 find_program(NPM_EXECUTABLE npm REQUIRED)
 
 set(OTIO_WASM_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}/dist")
+set(OTIO_WASM_SAMPLE_SOURCE
+    "${PROJECT_SOURCE_DIR}/tests/sample_data/clip_example.otio")
+set(OTIO_WASM_SAMPLE_OUTPUT
+    "${OTIO_WASM_OUTPUT_DIR}/clip_example.otio")
 set(OTIO_WASM_TS_SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/typescript/index.ts"
     "${CMAKE_CURRENT_SOURCE_DIR}/typescript/browser-demo.ts"
@@ -44,6 +48,7 @@ add_custom_command(
         "${OTIO_WASM_OUTPUT_DIR}/otio_wasm.d.ts"
         "${OTIO_WASM_OUTPUT_DIR}/package.json"
         "${OTIO_WASM_OUTPUT_DIR}/browser-demo.html"
+        "${OTIO_WASM_SAMPLE_OUTPUT}"
     COMMAND "${CMAKE_COMMAND}" -E make_directory "${OTIO_WASM_OUTPUT_DIR}"
     COMMAND "${CMAKE_COMMAND}" -E copy_if_different
             "${CMAKE_CURRENT_SOURCE_DIR}/typescript/otio_wasm.d.ts"
@@ -54,6 +59,9 @@ add_custom_command(
     COMMAND "${CMAKE_COMMAND}" -E copy_if_different
             "${CMAKE_CURRENT_SOURCE_DIR}/demo/browser-demo.html"
             "${OTIO_WASM_OUTPUT_DIR}/browser-demo.html"
+    COMMAND "${CMAKE_COMMAND}" -E copy_if_different
+            "${OTIO_WASM_SAMPLE_SOURCE}"
+            "${OTIO_WASM_SAMPLE_OUTPUT}"
     COMMAND "${NPM_EXECUTABLE}" ci
     COMMAND "${NPM_EXECUTABLE}" run build -- --outDir "${OTIO_WASM_OUTPUT_DIR}"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
@@ -62,6 +70,7 @@ add_custom_command(
         "${CMAKE_CURRENT_SOURCE_DIR}/package.json"
         "${CMAKE_CURRENT_SOURCE_DIR}/package-lock.json"
         "${CMAKE_CURRENT_SOURCE_DIR}/tsconfig.json"
+        "${OTIO_WASM_SAMPLE_SOURCE}"
         ${OTIO_WASM_TS_SOURCES}
     VERBATIM)
 
@@ -75,4 +84,5 @@ add_custom_target(
         "${OTIO_WASM_OUTPUT_DIR}/browser-demo.d.ts"
         "${OTIO_WASM_OUTPUT_DIR}/otio_wasm.d.ts"
         "${OTIO_WASM_OUTPUT_DIR}/package.json"
-        "${OTIO_WASM_OUTPUT_DIR}/browser-demo.html")
+        "${OTIO_WASM_OUTPUT_DIR}/browser-demo.html"
+        "${OTIO_WASM_SAMPLE_OUTPUT}")
