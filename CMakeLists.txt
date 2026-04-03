@@ -2,7 +2,9 @@
 # Require 3.18.2+ because pybind11 recommends it.
 cmake_minimum_required(VERSION 3.18.2)
 # This policy CMP0177 can be removed when we upgrade to CMake >= 3.31.
-cmake_policy(SET CMP0177 NEW)
+if(POLICY CMP0177)
+    cmake_policy(SET CMP0177 NEW)
+endif()
 
 #------------------------------------------------------------------------------
 # Project Metadata
@@ -53,6 +55,7 @@ option(OTIO_SHARED_LIBS          "Build shared if ON, static if OFF" ON)
 option(OTIO_CXX_COVERAGE         "Invoke code coverage if lcov/gcov is available" OFF)
 option(OTIO_CXX_EXAMPLES         "Build CXX examples (also requires OTIO_PYTHON_INSTALL=ON)" OFF)
 option(OTIO_AUTOMATIC_SUBMODULES "Fetch submodules automatically" ON)
+option(OTIO_WASM_BUILD           "Build the browser/WebAssembly bindings" OFF)
 
 #------------------------------------------------------------------------------
 # Set option dependent variables
@@ -281,6 +284,10 @@ endif()
 
 if(OTIO_PYTHON_INSTALL)
     add_subdirectory(src/py-opentimelineio)
+endif()
+
+if(OTIO_WASM_BUILD)
+    add_subdirectory(src/wasm-opentimelineio)
 endif()
 
 if(OTIO_CXX_EXAMPLES)

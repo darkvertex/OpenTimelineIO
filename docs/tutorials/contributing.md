@@ -18,6 +18,19 @@ Here are the two possible CLAs:
 ## Coding Conventions
 Please follow the coding convention and style in each file and in each library when adding new files.
 
+## Recommended development environment
+
+If you want the most reproducible setup, use the repo's containerized
+environment:
+
+- `Dockerfile` defines the canonical clean build image
+- `.devcontainer/devcontainer.json` is the easiest way to contribute from a Dev
+  Container-capable editor
+
+For the full clean-checkout build steps, Docker usage, devcontainer setup, and
+the current browser/wasm workbench guidance, see
+[Development Environment](./development-environment.md).
+
 ## Platform Support Policy
 As recommended by the [VFX Platform](https://vfxplatform.com) (see "Support Guidance"), we support the intended calendar year of the release as well as the three prior years.
 

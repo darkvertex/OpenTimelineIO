@@ -27,6 +27,7 @@ Quick Start
    :caption: Quick Start
 
    tutorials/quickstart
+   tutorials/development-environment
    tutorials/otio-env-variables
    tutorials/otiotool
 
@@ -38,6 +39,7 @@ Tutorials
 
    tutorials/adapters
    tutorials/architecture
+   tutorials/browser-wasm
    tutorials/contributing
    tutorials/feature-matrix
    tutorials/otio-timeline-structure

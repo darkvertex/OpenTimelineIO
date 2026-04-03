@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "ES2020",
+    "moduleResolution": "Bundler",
+    "rootDir": "typescript",
+    "strict": true,
+    "skipLibCheck": true,
+    "target": "ES2020"
+  },
+  "include": [
+    "typescript/**/*.ts",
+    "typescript/**/*.d.ts"
+  ]
+}
